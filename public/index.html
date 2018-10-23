@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="stylesheets/style.css">
     <link rel="stylesheet" href="./stylesheets/emoji.css">
 
-    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js" integrity="sha384-kW+oWsYx3YpxvjtZjFXqazFpA7UP/MbiY4jvs+RWZo2+N94PFZ36T6TFkc9O3qoB" crossorigin="anonymous"></script>
+    <!--script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js" integrity="sha384-kW+oWsYx3YpxvjtZjFXqazFpA7UP/MbiY4jvs+RWZo2+N94PFZ36T6TFkc9O3qoB" crossorigin="anonymous"></script-->
     <script src="./javascripts/jquery-3.3.1.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="./javascripts/config.js"></script>
@@ -65,11 +65,9 @@
                     <div id="chat" class="card-body"></div>
                     <form id="message-form" class="card-footer">
                         <div class="input-group">
-                            <!--p class="lead emoji-picker-container"-->
-                                <input type="text" id="message" class="form-control" data-emojiable="true">
-                                <button type="submit" class="btn btn-success">Enviar</button>
-                            <!--/p-->                            
+                            <input type="text" id="message" class="form-control" data-emojiable="true">
                         </div>
+                        <button type="submit" class="btn btn-success">Enviar</button>
                     </form>
                 </div>
             </div>
