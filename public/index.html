@@ -59,9 +59,7 @@
         <div class="row justify-content-md-around mt-4">
             <div class="col-md-6">
                 <div class="card">
-                    <div id="titulo" class="card-header">
-                        <!--h4>Chatingo!!</h4-->
-                    </div>
+                    <div id="titulo" class="card-header"></div>
                     <div id="chat" class="card-body"></div>
                     <form id="message-form" class="card-footer">
                         <div class="input-group">
@@ -84,7 +82,7 @@
                 </div>
             </div>
 
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <div class="card">
                     <div class="card-header">
                         <h3>Estado</h3>
@@ -102,6 +100,25 @@
                             <input type="hidden" id="noDisponible" class="form-control" value="No disponible">
                             <button type="submit" class="btn btn-danger mx-auto">No disponible</button>
                         </form>
+                    </div>
+                </div>
+                
+                <div class="input-group mb-3">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" name="archivo" id="archivo">
+                        <label class="custom-file-label" for="archivo" aria-describedby="archivoAdd">Elegir archivo</label>
+                    </div>
+                    <div class="input-group-append">
+                        <button class="btn btn-secundary" type="button" id="archivoAdd">Subir</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Comandos</h3>
+                    </div>
+                    <div class="card-body">
+                        <b>/msg 'usuario' 'mensaje'</b>
+                        <b>/del 'usuario'</b>                        
                     </div>
                 </div>
             </div>
