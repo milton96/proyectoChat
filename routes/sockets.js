@@ -55,17 +55,38 @@ module.exports = function (io) {
                     cb('Ingresa un mensaje');
                 }
             } else{
-                var newMsg = new mensajes({
-                    nick: socket.nickname,
-                    msg
-                });
-                await newMsg.save();
-    
-                io.sockets.emit('nuevo mensaje', {
-                    msg: data,
-                    nick: socket.nickname
-                });
+                if(msg.substr(0,5) === '/del '){                    
+                    msg = msg.substr(5);
+                    const index = msg.indexOf(msg.charAt(msg.length-1));
+                    if(index !== -1){
+                        var name = msg.substr(0, index+1);
+                        //console.log(name);
+                        if(name in usuarios){
+                            var result = await mensajes.deleteMany({"nick":name});
+                            //console.log(result);
+                            io.sockets.emit('mensajes eliminados', name, result.n);
+                        } else {
+                            cb('No existe el usuario');
+                        }
+                    }
+                } else{
+                    var newMsg = new mensajes({
+                        nick: socket.nickname,
+                        msg
+                    });
+                    await newMsg.save();
+        
+                    io.sockets.emit('nuevo mensaje', {
+                        msg: data,
+                        nick: socket.nickname
+                    });
+                }
             }            
+        });
+
+        socket.on('ferret', function(name, fn) {
+            console.log(name + " ha enviado un mensaje");
+            fn('woot');
         });
 
         socket.on('disconnect', data => {
@@ -98,6 +119,10 @@ module.exports = function (io) {
 
         socket.on('mensaje privado', data => { //aqui se debe obtener el nickname de a quien se le va a enviar el mensaje
 
+        });
+
+        socket.on('delete msg', data => {
+            console.log("Mesaje borrado");
         });
 
         function updateNicknames() {

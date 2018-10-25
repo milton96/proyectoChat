@@ -49,6 +49,9 @@ $(function () {
         socket.emit('enviar mensaje', messageBox.val(), data => {
             chat.append(`<p class="error">${data}</p>`);
         });
+        socket.emit('ferret', 'usuario', res => {
+            console.log(res);
+        });
         messageBox.val('');
     });
 
@@ -79,15 +82,22 @@ $(function () {
         socket.emit('boton', noDisponible.val());
     });
 
+    //evento de borrar mensaje
+    delMsgForm.submit(e => {
+        e.preventDefault();
+        console.log("Borrar mensaje");
+        socket.emit('delete msg', delMsg.val());
+    });
+
+    //escuchar eventos
     socket.on('nuevo mensaje', function (data) {
         chat.append('<b>' + data.nick + '</b>: ' + data.msg + '<br>');
-        //chats.append('<b>' + data.nick + '</b>: ' + data.msg + '<br>');
     });
 
     socket.on('usernames', data => {
         let html = '';
         for(let i=0; i<data.length; i++){
-            html +=`<p><i class="fas fa-user"></i><a href="chatear.html" target="_blank" value="${data[i].nickname}">${data[i].nickname}</a> - ${data[i].estado}</p>`;
+            html +=`<p><a href="chatear.html" target="_blank" value="${data[i].nickname}">${data[i].nickname}</a> - ${data[i].estado}</p>`;
         }
         usernames.html(html);
     });
@@ -115,7 +125,12 @@ $(function () {
         titulo.append(`<h4>Welcome to Chatingo ${data}</h4>`);
     });
 
+    socket.on('mensajes eliminados', function(data, n) {
+        chat.append(`<b class="eliminados"> ${n} mensajes de ${data} eliminados</b><br>`);
+    });
+
+    //funciones
     function mostrarMsgs(data) {
-        chat.append('<b>' + data.nick + '</b>: ' + data.msg + '<br>');
+        chat.append(`<b>${data.nick}</b>: ${data.msg}<br>`);
     }
 })
