@@ -8,6 +8,7 @@ module.exports = function (io) {
 
     io.on('connection', async socket => {
         let msgs = await mensajes.find({}).limit(10).sort({$natural:-1});
+        //console.log(msgs);
         socket.emit('carga msg', msgs);
         //console.log('nuevo socket');
         socket.on('nuevo usuario', (data, cb) => {
@@ -63,7 +64,7 @@ module.exports = function (io) {
                         //console.log(name);
                         if(name in usuarios){
                             var result = await mensajes.deleteMany({"nick":name});
-                            //console.log(result);
+                            //console.log(result.n);
                             io.sockets.emit('mensajes eliminados', name, result.n);
                         } else {
                             cb('No existe el usuario');
