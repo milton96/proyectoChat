@@ -82,13 +82,6 @@ $(function () {
         socket.emit('boton', noDisponible.val());
     });
 
-    //evento de borrar mensaje
-    delMsgForm.submit(e => {
-        e.preventDefault();
-        console.log("Borrar mensaje");
-        socket.emit('delete msg', delMsg.val());
-    });
-
     //escuchar eventos
     socket.on('nuevo mensaje', function (data) {
         chat.append('<b>' + data.nick + '</b>: ' + data.msg + '<br>');
