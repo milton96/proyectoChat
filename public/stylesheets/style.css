@@ -26,3 +26,7 @@ body {
     color: green;
     font-style: italic;
 }
+
+.eliminados {
+    color: rosybrown;
+}
