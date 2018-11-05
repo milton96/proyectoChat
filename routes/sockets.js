@@ -122,10 +122,6 @@ module.exports = function (io) {
 
         });
 
-        socket.on('delete msg', data => {
-            console.log("Mesaje borrado");
-        });
-
         function updateNicknames() {
             //io.sockets.emit('usernames', Object.keys(usuarios));
             io.sockets.emit('usernames', usr);
